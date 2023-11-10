@@ -1,6 +1,7 @@
 var currentTimeEL = $("#time-display");
 var currentDayEl = $("#date-display");
 var scheduleEl = $("#schedule-display");
+var plans = [];
 
 // Function to get current time & date
 function displayTime() {
@@ -23,7 +24,8 @@ function displaySchedule() {
 
         var timeBlockEl = $("<div>");
         var timeslot = $("<div>").text(convertedTime).addClass("hour");
-        var timeBlock = $("<input>").addClass("time-block");
+        var timeBlock = $("<input>").addClass("time-block").attr("type", "text");
+        timeBlock.attr("index", i - 9);
         var addButton = $("<button>").text("Add").addClass("saveBtn");
         timeBlockEl.append(timeslot, timeBlock, addButton);
         scheduleEl.addClass("schedule-block").append(timeBlockEl);
@@ -31,4 +33,21 @@ function displaySchedule() {
    
 }
 
+// Create layout
 displaySchedule();
+
+// Function to save text to local storage
+function saveInput(event) {
+    event.preventDefault();
+    var inputBlock = $(this).siblings("input").attr("index");
+    var inputText = $(this).siblings("input").val();
+    var newEntry = {
+        placement: inputBlock,
+        textInput: inputText
+    };
+    plans.push(newEntry);
+    localStorage.setItem("allPlans", JSON.stringify(plans));
+}
+
+// Event handler for saved text
+scheduleEl.on("click", ".saveBtn", saveInput)
