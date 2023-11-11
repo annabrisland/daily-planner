@@ -40,7 +40,7 @@ displaySchedule();
 function saveInput(event) {
     event.preventDefault();
     var inputBlock = $(this).siblings("input").attr("index");
-    var inputText = $(this).siblings("input").val();
+    var inputText = $(this).siblings("input").val().trim();
     var newEntry = {
         placement: inputBlock,
         textInput: inputText
@@ -48,6 +48,27 @@ function saveInput(event) {
     plans.push(newEntry);
     localStorage.setItem("allPlans", JSON.stringify(plans));
 }
+
+// Function for retrieving from local storage & display inputs
+function renderInput() {
+    current = localStorage.getItem("allPlans");
+    // check if allPlans exists
+    if (current) {
+        plans = JSON.parse(current);
+    };
+    // loop through all time blocks
+    for (var i = 0; i < scheduleEl.children().length; i++) {
+        // loop through array check if object placement = i
+        for (var j = 0; j < plans.length; j++) {
+            // if equal, add object inputText as text
+            var checkPlacement = plans[j].placement;
+            if (i == checkPlacement) {
+                scheduleEl.children().eq(i).children("input").val(plans[j].textInput);
+            }
+        }
+    }
+}
+renderInput();
 
 // Event handler for saved text
 scheduleEl.on("click", ".saveBtn", saveInput)
