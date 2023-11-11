@@ -15,6 +15,7 @@ setInterval(displayTime, 1000);
 
 // Function to add schedule layout
 function displaySchedule() {
+    // convert to AM/PM
     for (var i = 9; i <= 17; i++) {
         if (i > 12) {
             var convertedTime = i - 12 + "PM";
@@ -22,10 +23,23 @@ function displaySchedule() {
             var convertedTime = i + "AM";
         };
 
+        // Colour code based on time
+        var nowTime = dayjs().format("H");
+
+        // Dynamically create schedule
         var timeBlockEl = $("<div>");
         var timeslot = $("<div>").text(convertedTime).addClass("hour");
         var timeBlock = $("<input>").addClass("time-block").attr("type", "text");
         timeBlock.attr("index", i - 9);
+        // Add colour class
+        if (i > nowTime) {
+            timeBlock.addClass("future");
+        } else if (i < nowTime) {
+            timeBlock.addClass("past");
+        } else {
+            timeBlock.addClass("present");
+        };
+        
         var addButton = $("<button>").text("Add").addClass("saveBtn");
         timeBlockEl.append(timeslot, timeBlock, addButton);
         scheduleEl.addClass("schedule-block").append(timeBlockEl);
