@@ -1,28 +1,87 @@
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
+  color: #484b6a;
   line-height: 1;
-}
-
-textarea {
-  background: transparent;
-  border: none;
-  resize: none;
-  color: #000000;
-  border-left: 1px solid black;
-  padding: 10px;
+  background-color: #fafafa;
 }
 
 header {
   text-align: center;
-  background-color: transparent;
-  color: black;
-  border-radius: 0;
-  border-bottom: 10px solid black;
+  background-color: #e4e5f1;
   padding: 60px;
 }
 
-.description {
+#date-display {
+  font-size: 60px;
+  font-weight: 600;
+}
+
+#time-display {
+  font-size: 45px;
+}
+
+#schedule-display {
+  margin-top: 25px;
+  margin-bottom: 30px;
+}
+
+.time-row {
+  display: flex;
+  margin-bottom: 10px;
+  width: 80vw;
+}
+
+.hour {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 25px;
+  color: #484b6a;
+  width: 150px;
+  padding-right: 20px;
+}
+
+.time-block {
+  height: 150px;
+  width: 100%;
+  border: none;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.past {
+  background-color: #d2d3db;
+  color: #484b6a;
+}
+
+.present {
+  background-color: #e4e5f1;
+  border: #6973ea 3px solid;
+  color: #484b6a;
+}
+
+.future {
+  background-color: #e4e5f1;
+  color: #484b6a;
+}
+
+.saveBtn {
+  width: 100px;
+  border-radius: 15px;
+  margin-left: 10px;
+  background-color: #5c65cd;
+  color: white;
+  border: none;
+}
+
+.saveBtn:hover {
+  background-color: #484b6a;
+  transition: all 0.2s ease-in-out
+}
+
+
+/* Presets */
+/* .description {
   white-space: pre-wrap;
 }
 
@@ -69,4 +128,4 @@ header {
 .saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
-}
+} */
